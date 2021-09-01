@@ -62,6 +62,10 @@ export function renderPokemon() {
     encounteredPokemon(arr[0].id);
     encounteredPokemon(arr[1].id);
     encounteredPokemon(arr[2].id);
+
+    pokemanInput1.checked = false;
+    pokemanInput2.checked = false;
+    pokemanInput3.checked = false;
     
     }
 
@@ -129,9 +133,9 @@ export function encounteredPokemon(id) {
 
 export function catchPokemon(id) {
     const catchArray = getPokedex();
-    console.log(catchArray);
+    
     const lastCaught = findById(catchArray, id);
-    console.log(lastCaught, id);
+    
     lastCaught.caught++;
 
     setPokedex(catchArray);
