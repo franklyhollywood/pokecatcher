@@ -30,7 +30,7 @@ userButton.addEventListener('click', () => {
   renderPokemon();
   tries++;
   if (tries === 10) {
-    window.location = '../results/index.html';
+    window.location = './results/index.html';
   }
 
 });
