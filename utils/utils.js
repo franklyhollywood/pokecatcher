@@ -1,4 +1,5 @@
 import pokemon from '../pokeman-data.js';
+import { findById } from './findById.js';
 
 // This function getRandomPokemon()
 // - does the hard work of finding three unique and random pokemon from our raw data
@@ -30,6 +31,43 @@ export function getRandomPokemon() {
 }
 
 
+export function renderPokemon() {
+    const pokemanInput1 = document.getElementById('pokemon1');
+    const pokemanInput2 = document.getElementById('pokemon2');
+    const pokemanInput3 = document.getElementById('pokemon3');
+    const pokemanImg1 = document.getElementById('pokemonImg1');
+    const pokemanImg2 = document.getElementById('pokemonImg2');
+    const pokemanImg3 = document.getElementById('pokemonImg3');
+    const userButton = document.getElementById('catchPokemon')
+    
+    // console.log(pokemanImg1, pokemanImg2, pokemanImg3, pokemanInput1, pokemanInput2, pokemanInput3);
+    
+    const arr = getRandomPokemon();
+    //console log single random pokemon
+    
+    
+    
+    
+    pokemanImg1.src = arr[0].url_image;
+    pokemanInput1.value = arr[0].id;
+    
+    pokemanImg2.src = arr[1].url_image;
+    pokemanInput2.value = arr[1].id;
+    
+    pokemanImg3.src = arr[2].url_image;
+    pokemanInput3.value = arr[2].id;
+    
+    //const userSelectionPokemon = getPokedex();
+    
+    encounteredPokemon(arr[0].id);
+    encounteredPokemon(arr[1].id);
+    encounteredPokemon(arr[2].id);
+    
+    }
+
+
+
+
 
 // renderNewPokemon()
 // - We need to find three unique pokemon to show the user
@@ -37,7 +75,7 @@ export function getRandomPokemon() {
 //     - Whenever we find 3 new pokemon, we need to track that they have now been "seen"
 //     - call encounterPokemon() on all 3 new pokemon
 
-
+const POKEMON = 'POKEMON';
 
 // setPokedex(pokedex)
 // - takes in a pokedex, stringifies it and puts it into local storage
@@ -46,7 +84,7 @@ export function setPokedex(pokedex) {
     //stringify cart array:
     const stringifiedPokemon = JSON.stringify(pokedex);
     //Put cart into local storage:
-    localStorage.setItem(stringifiedPokemon, pokedex);
+    localStorage.setItem(POKEMON, stringifiedPokemon);
 }
 
 
@@ -54,7 +92,7 @@ export function setPokedex(pokedex) {
 // - retrieves and parses the pokedex in local storage
 export function getPokedex() {
     //here we are getting anything in localStorage:
-    const stringifiedPokedex = localStorage.getItem('pokedex');
+    const stringifiedPokedex = localStorage.getItem(POKEMON);
     
     if (!stringifiedPokedex) {
 
@@ -74,10 +112,10 @@ export function getPokedex() {
 export function encounteredPokemon(id) {
     const encounterArray = getPokedex();
     const lastSeen = findById(encounterArray, id);
-    if (lastseen) {
-        lastseen.seen++;
+    if (lastSeen) {
+        lastSeen.seen++;
     } else {
-        const pokemonObject = { id:id, seen: 1, causth: 0 };
+        const pokemonObject = { id:id, seen: 1, caught: 0 };
         encounterArray.push(pokemonObject);
     }
     setPokedex(encounterArray);
@@ -88,3 +126,13 @@ export function encounteredPokemon(id) {
 // - no need to check if it's been encountered. If you got this far, it _has_ been encountered.
 // - Increment the `caught` of this pokemon in local storage
 // - setPokedex
+
+export function catchPokemon(id) {
+    const catchArray = getPokedex();
+    console.log(catchArray);
+    const lastCaught = findById(catchArray, id);
+    console.log(lastCaught, id);
+    lastCaught.caught++;
+
+    setPokedex(catchArray);
+}
