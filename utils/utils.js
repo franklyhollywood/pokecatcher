@@ -116,10 +116,11 @@ export function getPokedex() {
 export function encounteredPokemon(id) {
     const encounterArray = getPokedex();
     const lastSeen = findById(encounterArray, id);
+    const pokeName = findById(pokemon, id);
     if (lastSeen) {
         lastSeen.seen++;
     } else {
-        const pokemonObject = { id:id, seen: 1, caught: 0 };
+        const pokemonObject = { id: id, seen: 1, caught: 0, name: pokeName.pokemon };
         encounterArray.push(pokemonObject);
     }
     setPokedex(encounterArray);

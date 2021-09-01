@@ -21,12 +21,17 @@ const userButton = document.getElementById('catchPokemon');
 
 renderPokemon();
 
+let tries = 0;
+
 userButton.addEventListener('click', () => {
   const selectedPokemon = document.querySelector('input:checked');
 
   catchPokemon(selectedPokemon.value);
   renderPokemon();
-  
+  tries++;
+  if (tries === 10) {
+    window.location = '../results/index.html';
+  }
 
 });
 
