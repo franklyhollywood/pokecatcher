@@ -68,11 +68,11 @@ export function renderPokemon() {
 const POKEMON = 'POKEMON';
 
 // - takes in a pokedex, stringifies it and puts it into local storage
-export function setPokedex(pokedex) {
+export function setPokedex(rawData) {
     //stringify pokedex array:
-    const stringifiedPokemon = JSON.stringify(pokedex);
+    const stringifiedData = JSON.stringify(rawData);
     //Put pokemon into local storage:
-    localStorage.setItem(POKEMON, stringifiedPokemon);
+    localStorage.setItem(POKEMON, stringifiedData);
 }
 
 
